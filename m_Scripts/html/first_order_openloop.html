@@ -1,0 +1,364 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>First Order Equation OL</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-04-07"><meta name="DC.source" content="first_order_openloop.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>First Order Equation OL</h1><!--introduction--><p>Author: Mohammed Ijaz PS Number: 99003728 Date: 7th April 2021. Version: Matlab 2020b.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Plant Description</a></li><li><a href="#2">Math Analysis</a></li><li><a href="#3">Tool Analysis:</a></li><li><a href="#4">Comparison Analysis:</a></li></ul></div><h2 id="1">Plant Description</h2><p>The Mass-damper first order system is taken as Plant. Equation: f= Bv + M v' f = force; B= coefficient of friction; M = mass ; v= velocity. Values:  B1= 0.4 M1=1000; B2= 0.5 M2= 500; B3= 1.7 M3= 340;</p><h2 id="2">Math Analysis</h2><p>Independent: Time(t) Dependent: Velocity(v) and Force(f) Constant: Mass(M) and Frictional Coefficient(B)</p><pre class="codeinput"><span class="comment">% Roots:(-B)/M</span>
+
+<span class="comment">% Poles and Zero Calculation:</span>
+
+
+<span class="comment">% IVT:</span>
+<span class="comment">% 1. For step input: 0</span>
+<span class="comment">% 2. For impulse input: 1/M</span>
+
+<span class="comment">% FVT:</span>
+<span class="comment">% 1. For step input: 1/B</span>
+<span class="comment">% 2. For impulse input: 0</span>
+
+<span class="comment">% Time Response Results:</span>
+<span class="comment">% Rise Time :4tau = (4M)/B; where tau = M/B</span>
+</pre><h2 id="3">Tool Analysis:</h2><pre class="codeinput">clc;
+B1= 0.5;
+M1= 5;
+P = 2;
+
+ sys = tf([P/M1],[1,B1/M1])
+ subplot(4,3,1);
+ impulse(sys);
+ title(<span class="string">'Impulse Input for k'</span>);
+ subplot(4,3,2);
+ step(sys);
+ title(<span class="string">'Step Input for k'</span>);
+ subplot(4,3,3);
+ [z,p,k]= tf2zp([P/M1],[1,B1/M1])
+ pzmap(sys)
+ subplot(4,3,10);
+ bode(sys)
+
+ hold <span class="string">on</span>;
+ S = stepinfo(sys)
+
+sys = tf([P/M1],[1,B1/M1,0])
+subplot(4,3,4);
+impulse(sys);
+title(<span class="string">'Impulse Input for 1/s'</span>);
+subplot(4,3,5);
+step(sys);
+title(<span class="string">'Step Input for 1/s'</span>);
+subplot(4,3,6);
+[z,p,k]= tf2zp([P/M1],[1,B1/M1,0])
+pzmap(sys)
+ subplot(4,3,11);
+ bode(sys)
+hold <span class="string">on</span>;
+S = stepinfo(sys)
+sys = tf([P/M1,0],[1,B1/M1])
+subplot(4,3,7);
+impulse(sys);
+title(<span class="string">'Impulse Input for s'</span>);
+subplot(4,3,8);
+step(sys);
+title(<span class="string">'Step Input for s'</span>);
+subplot(4,3,9);
+[z,p,k]= tf2zp([P/M1,0],[1,B1/M1])
+pzmap(sys)
+ subplot(4,3,12);
+ bode(sys)
+hold <span class="string">on</span>;
+S = stepinfo(sys)
+</pre><pre class="codeoutput">
+sys =
+ 
+    0.4
+  -------
+  s + 0.1
+ 
+Continuous-time transfer function.
+
+
+z =
+
+  0&times;1 empty double column vector
+
+
+p =
+
+   -0.1000
+
+
+k =
+
+    0.4000
+
+
+S = 
+
+  struct with fields:
+
+        RiseTime: 21.9701
+    SettlingTime: 39.1207
+     SettlingMin: 3.6180
+     SettlingMax: 3.9999
+       Overshoot: 0
+      Undershoot: 0
+            Peak: 3.9999
+        PeakTime: 105.4584
+
+
+sys =
+ 
+      0.4
+  -----------
+  s^2 + 0.1 s
+ 
+Continuous-time transfer function.
+
+
+z =
+
+  0&times;1 empty double column vector
+
+
+p =
+
+         0
+   -0.1000
+
+
+k =
+
+    0.4000
+
+
+S = 
+
+  struct with fields:
+
+        RiseTime: NaN
+    SettlingTime: NaN
+     SettlingMin: NaN
+     SettlingMax: NaN
+       Overshoot: NaN
+      Undershoot: NaN
+            Peak: Inf
+        PeakTime: Inf
+
+
+sys =
+ 
+   0.4 s
+  -------
+  s + 0.1
+ 
+Continuous-time transfer function.
+
+
+z =
+
+     0
+
+
+p =
+
+   -0.1000
+
+
+k =
+
+    0.4000
+
+
+S = 
+
+  struct with fields:
+
+        RiseTime: 21.9701
+    SettlingTime: 39.1207
+     SettlingMin: 1.0521e-05
+     SettlingMax: 0.0382
+       Overshoot: 0
+      Undershoot: 7.2058e+17
+            Peak: 0.4000
+        PeakTime: 0
+
+</pre><img vspace="5" hspace="5" src="first_order_openloop_01.png" alt=""> <h2 id="4">Comparison Analysis:</h2><p>Propotional controller will have no effect on Rising time and setting time of the system hence there response parameters remains same for all values of p and only the amplitude of the system get affected by P times.</p><pre class="codeinput"><span class="comment">%Integrator controller is used to eliminate steady state error from the</span>
+<span class="comment">%system , but as a pole is added system is going from stable to marginally</span>
+<span class="comment">%stable.</span>
+<span class="comment">%Differentiator controll on system adds a zero to the system and makes</span>
+<span class="comment">%unstable system stable in our case</span>
+
+<span class="comment">%Stability: Both System 1 and System 3 are stable as roots are negetive and have same system responses.</span>
+<span class="comment">%Accuracy:  Settling time of System 1 and System 3  is lowest so they are Accurate.</span>
+<span class="comment">%Speed:  Rise time of System 1 and System 3 is lowest so they are high speed Systems.</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% First Order Equation OL
+% Author: Mohammed Ijaz
+% PS Number: 99003728
+% Date: 7th April 2021.
+% Version: Matlab 2020b.
+
+%% Plant Description
+% The Mass-damper first order system is taken as Plant.
+% Equation: f= Bv + M v'
+% f = force; B= coefficient of friction; M = mass ; v= velocity.
+% Values:  B1= 0.4 M1=1000; B2= 0.5 M2= 500; B3= 1.7 M3= 340;
+
+
+%% Math Analysis
+% Independent: Time(t)
+% Dependent: Velocity(v) and Force(f)
+% Constant: Mass(M) and Frictional Coefficient(B)
+
+% Roots:(-B)/M
+
+% Poles and Zero Calculation:
+
+
+% IVT:
+% 1. For step input: 0
+% 2. For impulse input: 1/M
+
+% FVT:
+% 1. For step input: 1/B
+% 2. For impulse input: 0
+
+% Time Response Results:
+% Rise Time :4tau = (4M)/B; where tau = M/B 
+
+%% Tool Analysis:
+
+clc;
+B1= 0.5;
+M1= 5;
+P = 2;
+
+ sys = tf([P/M1],[1,B1/M1])
+ subplot(4,3,1);
+ impulse(sys);
+ title('Impulse Input for k');
+ subplot(4,3,2);
+ step(sys);
+ title('Step Input for k');
+ subplot(4,3,3);
+ [z,p,k]= tf2zp([P/M1],[1,B1/M1])
+ pzmap(sys)
+ subplot(4,3,10);
+ bode(sys)
+ 
+ hold on;
+ S = stepinfo(sys)
+    
+sys = tf([P/M1],[1,B1/M1,0])
+subplot(4,3,4);
+impulse(sys);
+title('Impulse Input for 1/s');
+subplot(4,3,5);
+step(sys);
+title('Step Input for 1/s');
+subplot(4,3,6);
+[z,p,k]= tf2zp([P/M1],[1,B1/M1,0])
+pzmap(sys)
+ subplot(4,3,11);
+ bode(sys)
+hold on;
+S = stepinfo(sys)
+sys = tf([P/M1,0],[1,B1/M1])
+subplot(4,3,7);
+impulse(sys);
+title('Impulse Input for s');
+subplot(4,3,8);
+step(sys);
+title('Step Input for s');
+subplot(4,3,9);
+[z,p,k]= tf2zp([P/M1,0],[1,B1/M1])
+pzmap(sys)
+ subplot(4,3,12);
+ bode(sys)
+hold on;
+S = stepinfo(sys)
+
+
+
+
+%% Comparison Analysis:
+% Propotional controller will have no effect on Rising time and setting
+% time of the system hence there response parameters remains same for all values of p and only the amplitude of the system
+% get affected by P times.
+%Integrator controller is used to eliminate steady state error from the
+%system , but as a pole is added system is going from stable to marginally
+%stable.
+%Differentiator controll on system adds a zero to the system and makes
+%unstable system stable in our case
+
+%Stability: Both System 1 and System 3 are stable as roots are negetive and have same system responses.
+%Accuracy:  Settling time of System 1 and System 3  is lowest so they are Accurate.
+%Speed:  Rise time of System 1 and System 3 is lowest so they are high speed Systems.
+
+##### SOURCE END #####
+--></body></html>
